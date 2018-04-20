@@ -17,3 +17,11 @@
   right: -100px;
   transition: .5s ease-out all;
 }
+
+.material-icons {
+  cursor: pointer;
+}
+
+.add:hover {
+  color: red;
+}
