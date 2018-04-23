@@ -9,6 +9,8 @@ class LyricCreate extends Component {
     this.state = {
       content: '',
     }
+    
+    this.onSubmit = this.onSubmit.bind(this);
   }
 
   onSubmit(e){
@@ -19,14 +21,17 @@ class LyricCreate extends Component {
         content: this.state.content, 
         songId: this.props.id 
       }
-    }).then(() => this.setState({content: ''}));
+    }).then(() => this.setState({content: ''}));;
+
+    // this.setState({content: ''});
+
   }
 
   render(){
     return(
-      <form onSubmit={this.onSubmit.bind(this)}>
+      <form onSubmit={this.onSubmit}>
         <label>Add a lyric</label>
-        <input type="text" onChange={(e) => this.setState({content: e.target.value})} />
+        <input type="text" value={this.state.content} onChange={(e) => this.setState({content: e.target.value})} />
       </form>
     )
   }

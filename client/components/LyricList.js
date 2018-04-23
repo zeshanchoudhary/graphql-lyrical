@@ -4,8 +4,18 @@ import { likeLyric } from '../queries';
 
 class LyricList extends Component {
 
-  onLike(id){
-    this.props.mutate({variables: { id }})
+  onLike(id, currentLikes){
+    this.props.mutate(
+      {variables: { id },
+      optimisticResponse: { // Esto es para una mejor interfaz y una buena experiencia de usuario.
+        __typename: 'mutation',
+        likeLyric: {
+          id: id,
+          __typename: 'LyricType',
+          likes: currentLikes + 1
+        }
+      }
+    });
   }
 
   renderLyrics(){
@@ -14,7 +24,7 @@ class LyricList extends Component {
         <li key={id} className="collection-item">{
           content}
           <i className="material-icons right"
-             onClick={() => this.onLike(id)}>thumb_up</i>
+             onClick={() => this.onLike(id, likes)}>thumb_up</i>
           <span className="badge badge-pill badge-primary">{likes}</span>
         </li>
         );
